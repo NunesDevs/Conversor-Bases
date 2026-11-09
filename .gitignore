@@ -21,3 +21,4 @@ uploads/
 tmp/
 temp/
 cache/
+*.py[cod]

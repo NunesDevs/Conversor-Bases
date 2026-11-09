@@ -1,41 +1,23 @@
-# Conversor-Bases
+# Conversor de bases
 
-Conversor de números decimais positivos para as bases binária, quaternária, octal, hexadecimal e vigesimal.
+Converte um inteiro decimal para binário, quaternário, octal, hexadecimal e vigesimal. O algoritmo usa divisões sucessivas e o alfabeto `0–9, A–J`, sem dependências externas.
 
-## Funcionalidades verificadas
-
-- Divisão inteira e restos.
-- Conversão para cinco bases.
-- Mapeamento de dígitos A até J.
-- Menu para repetir conversões.
-
-## Operação e arquitetura verificadas
-
-Script único program.py; os dígitos são calculados por divisões sucessivas e impressos no console.
-
-Arquivos principais: `program.py`.
-
-### Requisitos e execução
-
-Python 3; biblioteca padrão.
-
-```text
+```sh
 python program.py
+python -m unittest discover -s tests -v
 ```
 
+Aceita zero e inteiros negativos. Entradas não inteiras são rejeitadas com mensagem e nova tentativa. EOF e interrupção encerram o menu sem traceback. Importar o módulo não abre o menu.
 
+```python
+from program import convert_decimal
+assert convert_decimal(19, 20) == "J"
+assert convert_decimal(-19, 2) == "-10011"
+assert convert_decimal(0, 16) == "0"
+```
 
-### Testes e estado
+`convert_decimal` é uma função pura. A função histórica `conversao(x, y, v)` continua imprimindo o resultado, atualiza a lista recebida e também devolve o texto. As bases aceitas são 2, 4, 8, 16 e 20.
 
-Não foi identificada uma suíte automatizada específica para os fluxos descritos; valide a execução e os casos de borda antes de publicar.
+Quatro testes cobrem zero, sinal, todas as bases, retorno para decimal com inteiros grandes e entradas inválidas. O programa usa apenas a biblioteca padrão de Python 3; não há frontend, backend ou serviço de deploy web. Para distribuir, basta o código Python e a licença MIT em `LICENSE`.
 
-Estado: projeto de estudo/experimental. Deploy ativo não foi confirmado nesta revisão.
-
-### Limitações conhecidas
-
-- Zero e valores negativos não têm representação tratada.
-- A condição v == 16 or 20 é sempre verdadeira; a validação de entradas deve ser revista.
-
-### Licença e manutenção
-
-Nenhum arquivo de licença foi identificado nesta revisão; não foi adicionada uma nova licença. Atualize comandos e limitações quando houver mudança de comportamento.
+Memória técnica: `docs/ai-context/QUALITY_REFRESH.md`.
